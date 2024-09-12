@@ -1,8 +1,17 @@
-#ifndef QUACK_H
-#define QUACK_H
+#if __has_include(<React-Codegen/RNQuackSpecJSI.h>)
+#include <React-Codegen/RNQuackSpecJSI.h>
+#elif __has_include("RNQuackSpecJSI.h")
+#include "RNQuackSpecJSI.h"
+#endif
 
-namespace quack {
-  double multiply(double a, double b);
-}
+#include <ReactCommon/CallInvoker.h>
+#include <jsi/jsi.h>
 
-#endif /* QUACK_H */
+namespace facebook::react {
+class NativeQuackTurboModule
+    : public NativeQuackCxxSpec<NativeQuackTurboModule> {
+public:
+  NativeQuackTurboModule(std::shared_ptr<CallInvoker> jsInvoker);
+  jsi::Value hello(jsi::Runtime &rt);
+};
+} // namespace facebook::react

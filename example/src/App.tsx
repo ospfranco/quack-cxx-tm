@@ -1,9 +1,14 @@
+import { useEffect, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-quack';
-
-const result = multiply(3, 7);
+import { hello } from 'react-native-quack';
 
 export default function App() {
+  const [result, setResult] = useState<string>('');
+
+  useEffect(() => {
+    hello().then(setResult);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text>Result: {result}</Text>
